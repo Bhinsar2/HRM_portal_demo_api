@@ -31,8 +31,6 @@ class AuthController {
             type
         }
         const {accessToken,refreshToken} = tokenService.generateToken(payload);
-        console.log("Access Token", accessToken);
-        console.log("Refresh Token", refreshToken);
         await tokenService.storeRefreshToken(_id,refreshToken);
         res.cookie('accessToken',accessToken,{
             maxAge:1000*60*60*24*30,
@@ -46,8 +44,6 @@ class AuthController {
             secure: true,
             sameSite: 'none'
         })
-S
-        console.log(res);
         res.json({success:true,message:'Login Successfull',user:new UserDto(user)})
     }
 
