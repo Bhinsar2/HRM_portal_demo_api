@@ -23,7 +23,7 @@ console.log(CLIENT_URL);
 //Cors Option
 const corsOption = {
     credentials:true,
-    origin:'*'
+    origin: ["http://localhost:3000",CLIENT_URL]
 }
 
 //Configuration
