@@ -9,13 +9,13 @@ class TeamController {
 
     createTeam = async (req,res,next) =>
     {
-        const image = req.file && req.file.filename;
+        // const image = req.file && req.file.filename; // IMAGE UPLOAD — COMMENTED OUT
         const {name,description} =req.body;
         if(!name) return next(ErrorHandler.badRequest('Required Parameter Teams Name Is Empty'))
         const team = {
             name,
-            description,
-            image
+            description
+            // ,image // IMAGE UPLOAD — COMMENTED OUT
         }
         const teamResp = await teamService.createTeam(team);
         if(!teamResp) return next(ErrorHandler.serverError('Failed To Create The Team'));
@@ -25,17 +25,18 @@ class TeamController {
     updateTeam = async (req,res,next) =>
     {
         const {id} = req.params;
+        console.log(req.body);
         if(!id) return next(ErrorHandler.badRequest('Team Id Is Missing'));
         if(!mongoose.Types.ObjectId.isValid(id)) return next(ErrorHandler.badRequest('Invalid Team Id'));
         let {name,description,status,leader} =req.body;
-        const image = req.file && req.file.filename;
+        // const image = req.file && req.file.filename; // IMAGE UPLOAD — COMMENTED OUT
         status = status && status.toLowerCase();
         if(leader && !mongoose.Types.ObjectId.isValid(leader)) return next(ErrorHandler.badRequest('Invalid Leader Id'));
         const team = {
             name,
             description,
             status,
-            image,
+            // image, // IMAGE UPLOAD — COMMENTED OUT
             leader
         }
         const teamResp = await teamService.updateTeam(id,team);

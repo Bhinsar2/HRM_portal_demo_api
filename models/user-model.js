@@ -53,11 +53,11 @@ const userSchema = new Schema({
         type:Schema.Types.ObjectId,
         ref:'Team'
     },
-    image:{
-        type:String,
-        required:false,
-        default:'user.png'
-    },
+    // image:{
+    //     type:String,
+    //     required:false,
+    //     default:'user.png'
+    // },
     address:{
         type:String,
         default:'No Address Specified',

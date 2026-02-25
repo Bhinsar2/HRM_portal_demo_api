@@ -5,7 +5,7 @@ const userService = require('../services/user-service');
 const tokenService = require('../services/token-service');
 const UserDto = require('../dtos/user-dto');
 const otpService = require('../services/otp-service');
-const mailService = require('../services/mail-service');
+// const mailService = require('../services/mail-service'); // EMAIL — COMMENTED OUT
 
 class AuthController {
 
@@ -59,7 +59,7 @@ class AuthController {
         const type = process.env.TYPE_FORGOT_PASSWORD;
         await otpService.removeOtp(userId);
         await otpService.storeOtp(userId,otp,type);
-        await mailService.sendForgotPasswordMail(name,email,otp);
+        // await mailService.sendForgotPasswordMail(name,email,otp); // EMAIL — COMMENTED OUT
         res.json({success:true,message:'Email has been sent to your email address'});
     }
 

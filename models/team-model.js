@@ -17,11 +17,11 @@ const teamScheam = new Schema({
         required:false,
         default:'This team does not have any description'
     },
-    image:{
-        type:String,
-        required:false,
-        default:'team.png'
-    },
+    // image:{
+    //     type:String,
+    //     required:false,
+    //     default:'team.png'
+    // },
     leader:{
         type:Schema.Types.ObjectId,
         ref:'User',

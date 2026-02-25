@@ -11,10 +11,10 @@ class UserController {
 
     createUser = async (req,res,next) =>
     {
-        const file = req.file;
+        // const file = req.file; // IMAGE UPLOAD — COMMENTED OUT
         let {name,email,password,type, address, mobile} = req.body;
         const username = 'user'+crypto.randomInt(11111111,999999999);
-        if(!name || !email || !username || !password || !type || !address || !file || !mobile) return next(ErrorHandler.badRequest('All Fields Required'));
+        if(!name || !email || !username || !password || !type || !address || !mobile) return next(ErrorHandler.badRequest('All Fields Required'));
         type = type.toLowerCase();
         if(type==='admin')
         {
@@ -27,7 +27,8 @@ class UserController {
             if(!isPasswordValid) return next(ErrorHandler.unAuthorized('You have entered a wrong password'));
         }
         const user = {
-            name,email,username,mobile,password,type,address,image:file.filename
+            name,email,username,mobile,password,type,address
+            // ,image:file.filename // IMAGE UPLOAD — COMMENTED OUT
         }
 
         
@@ -44,13 +45,14 @@ class UserController {
 
     updateUser = async (req,res,next) =>
     {
-        const file = req.file;
-        const filename = file && file.filename;
+        // const file = req.file; // IMAGE UPLOAD — COMMENTED OUT
+        // const filename = file && file.filename; // IMAGE UPLOAD — COMMENTED OUT
         let user,id;
         console.log(req.user.type);
         if(req.user.type==='admin')
         {
-            const {id} = req.params;
+            id = req.params.id;
+            console.log(req.body);
             let {name,username,email,password,type,status, address, mobile} = req.body;
             type = type && type.toLowerCase();
             if(!mongoose.Types.ObjectId.isValid(id)) return next(ErrorHandler.badRequest('Invalid User Id'));
@@ -77,7 +79,8 @@ class UserController {
                 }
             }
             user = {
-                name,email,status,username,mobile,password,type,address,image:filename
+                name,email,status,username,mobile,password,type,address
+                // ,image:filename // IMAGE UPLOAD — COMMENTED OUT
             }
         }
         else
@@ -85,12 +88,13 @@ class UserController {
             id =  req.user._id;
             let {name,username,address,mobile} = req.body;
             user = {
-                name,username,mobile,address,image:filename
+                name,username,mobile,address
+                // ,image:filename // IMAGE UPLOAD — COMMENTED OUT
             }
         }
-        // console.log(user);
+        console.log(user);
         const userResp = await userService.updateUser(id,user);
-        // console.log(userResp);
+        console.log(userResp);
         if(!userResp) return next(ErrorHandler.serverError('Failed To Update Account'));
         res.json({success:true,message:'Account Updated'});
     }

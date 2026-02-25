@@ -17,7 +17,8 @@ class UserDto{
         this.username = user.username,
         this.email = user.email,
         this.mobile = user.mobile,
-        this.image = user.image && `${process.env.BASE_URL}storage/images/profile/${user.image}`,
+        // this.image = user.image && `${process.env.BASE_URL}storage/images/profile/${user.image}`, // IMAGE UPLOAD — COMMENTED OUT
+        this.image = null,
         this.type = user.type && user.type.charAt(0).toUpperCase() + user.type.slice(1),
         this.address = user.address,
         this.status = user.status && user.status.charAt(0).toUpperCase()+user.status.slice(1),

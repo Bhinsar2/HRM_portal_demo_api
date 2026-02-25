@@ -39,7 +39,7 @@ app.use('/api/employee',auth,authRole(['employee','leader']),employeeRoute);
 app.use('/api/leader',auth,authRole(['leader']),leaderRoute);
 
 
-app.use('/storage',express.static('storage'))
+// app.use('/storage',express.static('storage')) // IMAGE DISPLAY — COMMENTED OUT
 
 //Middlewares;
 app.use((req,res,next)=>

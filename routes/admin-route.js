@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const userController = require('../controllers/user-controller');
 const teamController = require('../controllers/team-controller');
-const upload = require('../services/file-upload-service');
+const upload = require('../services/file-upload-service'); // IMAGE UPLOAD — stubbed out (see file-upload-service.js)
 const asyncMiddleware = require('../middlewares/async-middleware');
 
-router.post('/user',upload.single('profile'),asyncMiddleware(userController.createUser));           // Create User
-router.patch('/user/:id',upload.single('profile'),asyncMiddleware(userController.updateUser));      // Update User
+router.post('/user',asyncMiddleware(userController.createUser));           // Create User (Profile upload disabled)
+router.patch('/user/:id',asyncMiddleware(userController.updateUser));      // Update User  (Profile upload disabled)
 router.get('/employees',asyncMiddleware(userController.getUsers));                                  // Employees
 router.get('/employees/free',asyncMiddleware(userController.getFreeEmployees));                     // Free Employees
 router.get('/employee/:id',asyncMiddleware(userController.getUser));                                // Employee
@@ -15,8 +15,8 @@ router.get('/admin/:id',asyncMiddleware(userController.getUser));               
 router.get('/leaders/free',asyncMiddleware(userController.getFreeLeaders));                         // Free Leaders
 router.get('/leaders',asyncMiddleware(userController.getLeaders));                                  // Leaders
 router.get('/leader/:id',asyncMiddleware(userController.getUser));                                  // Leader
-router.post('/team',upload.single('image'),asyncMiddleware(teamController.createTeam));             // Create Team
-router.patch('/team/:id',upload.single('image'),asyncMiddleware(teamController.updateTeam));        // Update Team
+router.post('/team',asyncMiddleware(teamController.createTeam));             // Create Team (Image upload disabled)
+router.post('/team/:id',asyncMiddleware(teamController.updateTeam));        // Update Team (Image upload disabled)
 router.get('/teams',asyncMiddleware(teamController.getTeams));                                      // Teams
 router.get('/team/:id',asyncMiddleware(teamController.getTeam));                                    // Team
 router.get('/team/:id/members',asyncMiddleware(teamController.getTeamMembers));                     // Team Members
